@@ -1,5 +1,6 @@
 package com.recipeapp.ui;
 import com.recipeapp.datahandler.DataHandler;
+import com.recipeapp.model.Recipe;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,27 +37,41 @@ public class RecipeUI {
                  * IOExceptionを受け取った場合はError reading file: 例外のメッセージとコンソールに表示します
                  * 表示形式は以下の出力例を再現してください。
                  */
-                // private void displayRecipes(){
-
-                // }
-
+                
+                
                 switch (choice) {
                     case "1":
-                        break;
+                    displayRecipes();
+                    
+                    break;
                     case "2":
-                        break;
+                    break;
                     case "3":
-                        break;
+                    break;
                     case "4":
-                        System.out.println("Exiting the application.");
-                        return;
+                    System.out.println("Exiting the application.");
+                    return;
                     default:
-                        System.out.println("Invalid choice. Please select again.");
-                        break;
+                    System.out.println("Invalid choice. Please select again.");
+                    break;
                 }
             } catch (IOException e) {
                 System.out.println("Error reading input from user: " + e.getMessage());
             }
         }
     }
+    private void displayRecipes(){
+        //Recipe型のリスト（空）を作成
+        ArrayList<Recipe> recipesUi = new ArrayList<Recipe>();
+        //リストにDataHandlerのreadDataメソッドで読み込んだ値を代入
+        recipesUi = dataHandler.readData();
+        String line;
+        for(Recipe recipiUis : recipesUi){
+            // String[] recipiUi = recipiUis.split(",",2);//ここの処理は怪しい
+            // System.out.println(recipiUi[0]);
+            // System.out.println(recipiUi[1]);
+            System.out.println(recipiUis);
+        }
+    }
+    
 }
