@@ -1,4 +1,5 @@
 package com.recipeapp.ui;
+import com.recipeapp.datahandler.DataHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +31,14 @@ public class RecipeUI {
                 System.out.print("Please choose an option: ");
 
                 String choice = reader.readLine();
+                /*
+                 * displayRecipes void 引数なし なし - DataHandlerから読み込んだレシピデータを整形してコンソールに表示します。
+                 * IOExceptionを受け取った場合はError reading file: 例外のメッセージとコンソールに表示します
+                 * 表示形式は以下の出力例を再現してください。
+                 */
+                // private void displayRecipes(){
+
+                // }
 
                 switch (choice) {
                     case "1":
