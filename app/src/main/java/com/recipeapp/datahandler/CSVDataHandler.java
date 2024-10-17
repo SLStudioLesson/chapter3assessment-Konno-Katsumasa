@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import com.recipeapp.model.Ingredient;
 import com.recipeapp.model.Recipe;
@@ -40,38 +42,47 @@ public class CSVDataHandler implements DataHandler {
     @Override
     public ArrayList<Recipe> readData() {
         // recipes.csvからレシピデータを読み込み、それをリスト形式で返します。
+        ArrayList<Recipe> recipes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            
-            ArrayList<Recipe> recipes = new ArrayList<>();
+
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] str = line.split(",", 2);
                 // String[] str = line[1];
                 ArrayList<Ingredient> ingredients = new ArrayList<>();
-                // while (  != null) { }    //(line = reader.readLine())
-
-                    // line.split(",");//ここはいらないかも
-                    Ingredient ig1 = new Ingredient(str[1]);
+                String[] ingredientsArray = str[1].split(",");
+                for (int i = 0; i < ingredientsArray.length; i++) {
+                    Ingredient ig1 = new Ingredient(ingredientsArray[i]);
                     ingredients.add(ig1);
-               
-                Recipe r1 = new Recipe(str[0]);
-                Recipe r2 = new Recipe(ingredients);
+                }
+
+                Recipe r1 = new Recipe(str[0], ingredients);
                 recipes.add(r1);
-                recipes.add(r2);
 
                 // r1.add(line[0]);
                 // recipes.add(line);
-                return  recipes;
-
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return recipes;
+        // return null;
     }
 
     @Override
     public void writeData(Recipe recipe) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))){
+            
+            String str = recipe.getName()+",";
+            for(Ingredient ing :recipe.getIngredients()){
+                str += ing.getName()+",";
+            }
+            writer.write(str);
+            writer.newLine();
+        }catch(IOException e){
+
+        }
 
     }
 

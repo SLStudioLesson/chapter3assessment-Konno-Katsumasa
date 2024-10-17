@@ -11,12 +11,12 @@ public class Recipe {
     private String name;
     private ArrayList<Ingredient> ingredients = new ArrayList<>();
 
-    public Recipe(String name){
+    public Recipe(String name,ArrayList<Ingredient> ingredients){
+        this.name = name;
+        this.ingredients = ingredients;
         
     }
-    public Recipe(ArrayList<Ingredient> ingredients){
-        
-    }
+    
     
     /*メソッド
     * getName	String	なし	nameフィールドを返す
